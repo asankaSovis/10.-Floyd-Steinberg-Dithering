@@ -10,7 +10,7 @@ Coded by Asanka Akash Sovis
 
 PImage img;
 
-int factor = 3;
+int factor = 1;
 boolean greyScale = false;
 
 int[] xPos      = new int[]{+1, -1,  0, +1};
@@ -18,7 +18,7 @@ int[] yPos      = new int[]{ 0, +1, +1, +1};
 int[] errFactor = new int[]{ 7,  3,  5,  1};
 
 void setup() {
-  size(1024, 512);
+  size(1920, 1920);
   
   noStroke();
 }
@@ -28,8 +28,6 @@ void draw() {
   
   if(greyScale)
     img.filter(GRAY);
-  
-  image(img, 0, 0);
   
   img.loadPixels();
   
@@ -57,11 +55,10 @@ void draw() {
   }
   
   img.updatePixels();
-  image(img, 512, 0);
-  
-  overlays();
+  image(img, 0, 0);
   
   //saveFrame("Output\\Floyd_Steinberg_Dithering-" + frameCount + ".png"); // Saves the current frame. Comment if you don't need
+  noLoop();
 }
 
 int index(int x, int y) {
@@ -81,35 +78,6 @@ color dither(int index, PImage img, float[] err, int errFactor) {
   return color(pixel[0], pixel[1], pixel[2]);
 }
 
-void overlays() {
-  textAlign(LEFT);
-  fill(50);
-  rect(10, height - 50, 55, 13, 2);
-  fill(100);
-  rect(10, height - 50, (55 * factor) / 16, 13, 2);
-  
-  fill(255);
-  textSize(10);
-  text("Factor: " + factor, 13, height - 40);
-  
-  fill(50);
-  rect(11, height - 30, 20, 8, 2);
-  
-  fill(100);
-  rect(21 - int(greyScale) * 10, height - 30, 10, 8, 2);
-  
-  fill(200 - int(greyScale) * 100);
-  textSize(10);
-  text("Color", 37, height - 22);
-  
-  fill(#DBD9DA);
-  textAlign(CENTER);
-  textSize(30);
-  text("FLOYD STEINBERG DITHERING", width / 2, 100);
-  textSize(10);
-  text("BY ASANKA SOVIS", width / 2, 120);
-}
-
 void mouseWheel(MouseEvent event) {
   factor += event.getCount();
   
@@ -118,8 +86,10 @@ void mouseWheel(MouseEvent event) {
   } else if (factor > 16) {
     factor = 16;
   }
+  loop();
 }
 
 void mousePressed() {
   greyScale = !greyScale;
+  loop();
 }
