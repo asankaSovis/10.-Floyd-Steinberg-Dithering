@@ -23,7 +23,7 @@ int[] yPos      = new int[]{ 0, +1, +1, +1};
 int[] errFactor = new int[]{ 7,  3,  5,  1}; // List of error factors
 
 void setup() {
-  size(1920, 1920); // Size of the image
+  size(520, 520); // Size of the image
   // NOTE: Change according to the image you have
   
   noStroke(); // Remove strokes
